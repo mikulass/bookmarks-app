@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of bookmarks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<h3>List of Bookmarks</h3>
+
+<div th:fragment="table" class="container">
+    <div class="container">
+        <div class="container-fluid">
+            <table border="1">
+                <thead>
+                <th>Name</th>
+                <th>URL</th>
+                <th>Added</th>
+                <th>Action</th>
+                </thead>
+                <tbody>
+                <tr th:each="bookmark : ${bookmarks}">
+                    <td th:text="${bookmark.name}"></td>
+                    <td>
+                        <a th:href="${bookmark.url}">
+                            <div th:text="${bookmark.url}"></div>
+                        </a>
+                    </td>
+                    <td th:text="${bookmark.added}"></td>
+                    <td>
+                        <a th:href="@{'/delete?id='+ ${bookmark.id}}">
+                            <div>delete</div>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<br><b>Submit new bookmark:</b>
+<form action="#" th:action="@{/saveBookmark}" th:object="${newBookmark}" method="post">
+    <table border="1">
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td>URL:</td>
+            <td><input type="url" th:field="*{url}"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

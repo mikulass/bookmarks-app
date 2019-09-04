@@ -1,0 +1,10 @@
+---
+applications:
+  - name: bookmarks-service
+    memory: 712M
+    instances: 2
+    random-route: true
+    path: ./build/libs/bookmarks-0.0.1-SNAPSHOT.jar
+    services:
+      - jans-db
+      - jans-eureka
